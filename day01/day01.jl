@@ -22,7 +22,33 @@ function star_one()
         running_sum += abs(val - l2[i])
     end
 
-    print(running_sum)
+    return running_sum
 end
 
-star_one()
+
+function star_two()
+    l1, l2 = readlists("data.txt")
+
+    counts = Dict{Int32,Int32}()
+    for val in l2
+        if haskey(counts, val)
+            counts[val] += 1
+        else
+            counts[val] = 1
+        end
+    end
+
+    running_sum = 0
+
+    for val in l1
+        if haskey(counts, val)
+            running_sum += val * counts[val]
+        end
+    end
+
+    return running_sum
+end
+    
+    
+println(star_one())
+println(star_two())
