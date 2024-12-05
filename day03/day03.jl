@@ -28,4 +28,33 @@ function star_one()
 
 end
 
-print(star_one())
+
+function star_two()
+    data = load_data("data.txt")
+    tot = 0
+    capture = r"mul\(\d{1,3},\d{1,3}\)|do\(\)|don't\(\)"
+    matches = eachmatch(capture, data)
+    enabled = true
+
+    yes = "do()"
+    no = "don't()"
+
+
+    for match in matches
+        if match.match == yes
+            enabled = true
+        elseif match.match == no
+            enabled = false
+        elseif enabled
+            tot += mul_capture(match.match)
+        else
+            continue
+        end
+    end
+
+    return tot
+end
+
+
+println(star_one())
+println(star_two())
